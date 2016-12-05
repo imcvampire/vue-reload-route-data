@@ -1,0 +1,25 @@
+{
+  "name": "vue-reload-route-data",
+  "version": "0.1.0",
+  "description": "A small Vuejs mixin for reload route data manually",
+  "main": "vue-reload-route-data.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imcvampire/vue-reload-route-data.git"
+  },
+  "keywords": [
+    "vuejs",
+    "reload",
+    "route",
+    "data"
+  ],
+  "author": "imcvampire",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imcvampire/vue-reload-route-data/issues"
+  },
+  "homepage": "https://github.com/imcvampire/vue-reload-route-data#readme"
+}

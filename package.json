@@ -1,6 +1,6 @@
 {
   "name": "vue-reload-route-data",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A small Vuejs mixin for reload route data manually",
   "main": "vue-reload-route-data.es5.js",
   "scripts": {

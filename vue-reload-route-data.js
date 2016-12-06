@@ -1,13 +1,12 @@
 (function () {
-  const vueReloadRouteData = {}
+  let vueReloadRouteData = {}
 
   vueReloadRouteData.install = function install(Vue) {
     if (vueReloadRouteData.installed) return;
     vueReloadRouteData.installed = true;
 
-    const isVersion1 = Vue.version[0] == '1';
     const mixin = {
-      [isVersion1 ? 'init' : 'beforeCreate']() {
+      beforeCreate() {
         if (this.$options.fetchRouteData) {
           !this.$options.methods && (this.$options.methods = {});
 
@@ -22,8 +21,8 @@
       beforeDestroy: destroyWatcher,
 
       /* Keep-alive support */
-      [isVersion1 ? 'attached' : 'activated']: initWatcher,
-      [isVersion1 ? 'detached' : 'deactivated']: destroyWatcher
+      activated: initWatcher,
+      deactivated: destroyWatcher
     };
 
     Vue.mixin(mixin);

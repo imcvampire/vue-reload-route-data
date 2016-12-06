@@ -1,33 +1,38 @@
-'use strict';
+"use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 (function () {
   var vueReloadRouteData = {};
 
   vueReloadRouteData.install = function install(Vue) {
-    var _mixin;
-
     if (vueReloadRouteData.installed) return;
     vueReloadRouteData.installed = true;
 
-    var isVersion1 = Vue.version[0] == '1';
-    var mixin = (_mixin = {}, _defineProperty(_mixin, isVersion1 ? 'init' : 'beforeCreate', function () {
-      var _this = this;
+    var mixin = {
+      beforeCreate: function beforeCreate() {
+        var _this = this;
 
-      if (this.$options.fetchRouteData) {
-        !this.$options.methods && (this.$options.methods = {});
+        if (this.$options.fetchRouteData) {
+          !this.$options.methods && (this.$options.methods = {});
 
-        /**
-         * Utility method for reloading route data
-         */
-        this.$options.methods.$reloadRouteData = function () {
-          return _this.$options.fetchRouteData(_this.$route);
-        };
-      }
-    }), _defineProperty(_mixin, 'created', initWatcher), _defineProperty(_mixin, 'beforeDestroy', destroyWatcher), _defineProperty(_mixin, isVersion1 ? 'attached' : 'activated', initWatcher), _defineProperty(_mixin, isVersion1 ? 'detached' : 'deactivated', destroyWatcher), _mixin);
+          /**
+           * Utility method for reloading route data
+           */
+          this.$options.methods.$reloadRouteData = function () {
+            return _this.$options.fetchRouteData(_this.$route);
+          };
+        }
+      },
+
+
+      created: initWatcher,
+      beforeDestroy: destroyWatcher,
+
+      /* Keep-alive support */
+      activated: initWatcher,
+      deactivated: destroyWatcher
+    };
 
     Vue.mixin(mixin);
 
@@ -45,7 +50,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this._unwatch$route = null;
   }
 
-  if ((typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) == "object") {
+  if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) == "object") {
     module.exports = vueReloadRouteData;
   } else if (typeof define == "function" && define.amd) {
     define([], function () {

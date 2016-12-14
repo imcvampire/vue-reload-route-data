@@ -5,7 +5,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function () {
   var vueReloadRouteData = {};
 
-  vueReloadRouteData.install = function install(Vue) {
+  vueReloadRouteData.install = function install(Vue, _ref) {
+    var _ref$immediate = _ref.immediate,
+        immediate = _ref$immediate === undefined ? true : _ref$immediate;
+
+
     if (vueReloadRouteData.installed) return;
     vueReloadRouteData.installed = true;
 
@@ -40,7 +44,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       if (this.$options.fetchRouteData && !this._unwatch$route) {
         this._unwatch$route = this.$watch('$route', function () {
           this.$options.fetchRouteData.apply(this, arguments);
-        }, { immediate: true });
+        }, { immediate: immediate });
       }
     }
   };

@@ -1,7 +1,10 @@
 (function () {
   let vueReloadRouteData = {}
 
-  vueReloadRouteData.install = function install(Vue) {
+  vueReloadRouteData.install = function install(Vue, {
+    immediate = true,
+  }) {
+
     if (vueReloadRouteData.installed) return;
     vueReloadRouteData.installed = true;
 
@@ -34,7 +37,7 @@
           function () {
             this.$options.fetchRouteData.apply(this, arguments);
           },
-          { immediate: true }
+          { immediate }
         );
       }
     }
